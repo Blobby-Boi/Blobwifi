@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chrome Automatic Update Blocker</title>
+    <script defer>
+      function gen() {
+        try {
+          var networks = document.querySelector("input").value;
+          networks = networks.replace(/(?<=[+-]..){/g, "");
+          networks = networks.replace(/(?<=})[^{\]}]*(?={.."C)/g, ",");
+          networks = networks.substring(networks.indexOf("{"));
+          networks = networks.substring(0, networks.lastIndexOf("}") + 1);
+          networks = JSON.parse("[" + networks + "]");
+          var onc = {
+            Type: "UnencryptedConfiguration",
+            NetworkConfigurations: [],
+          };
+          networks.forEach(function (network) {
+            if (!network.WiFi || !network.Connectable) return;
+            onc.NetworkConfigurations.push({
+              GUID: network.GUID,
+              Metered: true,
+              Name: network.Name,
+              Type: "WiFi",
+              WiFi: {
+                AutoConnect: true,
+                SSID: network.Name,
+                Security: "None",
+              },
+            });
+          });
+          if (!onc.NetworkConfigurations[0]) return;
+          var link = document.createElement("a");
+          link.href = URL.createObjectURL(new Blob([JSON.stringify(onc)]));
+          link.download = "blobby-caub.onc";
+          link.click();
+          link.remove();
+        } catch (error) {
+          console.error(error);
+          alert("caub ran into an error, check console logs");
+        }
+      }
+    </script>
+  </head>
+  <body style="white-space: pre-wrap; font-family: monospace">
+    <h1>CAUB - Exploit by Bypassi - Unblocked by Blobby-Boi</h1>
+    <h1>This only works on chrome 85 or higher</h1>
+    <hr />
+    this method (originally found by Catakang#0987) will help you keep your
+    chromebook downgraded (or on the current version) without automatic updates
+    screwing you over using onc files, you can convince your chromebook that the
+    wifi that you're connected to is pay-to-use (like a hotspot using data), and
+    thus it will not check for updates
+
+    <b>I cannot guarantee that this will work on every wifi</b>
+
+    <hr />
+    <b>to start:</b>
+
+    - go to chrome://network#state (on your school chromebook of course; if this
+    is blocked then ur kinda screwed lol) - scroll to the bottom of the page;
+    you should see a list of "favorite" wifis that you've connected to in the
+    past - click the + sign next to the wifi name of each network that you
+    commonly connect your chromebook to
+
+    <b
+      >the more wifis you expand, the better, but note that they have to come
+      from the "favorites" section</b
+    >
+
+    - use ctrl+a and ctrl+c to copy all the text on the entire network#state
+    page - go back to this page (caub.glitch.me) - paste the copied text into
+    the textbox below - press the "generate onc" button below the textbox
+
+    <hr />
+    <input placeholder="read instructions!" />
+
+    <button onclick="gen()"><b>generate and download onc file</b></button>
+
+    <b
+      >the input stuff here is new and a little hacky, if it doesn't seem to
+      work, try the <a href="/caub/old.html">old version</a></b
+    >
+    <hr />
+    - once you have downloaded the file, go to chrome://network#general - click
+    on the "import onc" button - import the newly downloaded file
+
+    <b
+      >your chromebook will no longer automatically update (as long as you are
+      on a wifi that you used caub on) be careful not to stay on a wifi for too
+      long without using caub on it</b
+    >
+
+    <hr />
+    <b>bonus:</b>
+
+    if you did caub on a school wifi that is forced by policy, you may be able
+    to view its password by doing the steps below: - go to
+    chrome://sync-internals on the chromebook - click "trigger getupdates"; the
+    number of synced wifi configurations should go up - follow the steps at the
+    <a href="https://sipe.glitch.me">sync internals password extractor</a> page
+    you may also be able to change the dns of the wifi from settings, but don't
+    expect it to connect
+  </body>
+</html>
