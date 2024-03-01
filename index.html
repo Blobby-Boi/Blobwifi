@@ -10,11 +10,15 @@
       line-height: 1.6;
       margin: 0;
       padding: 0;
+      background-color: #f4f4f4;
     }
     .container {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
       text-align: center;
@@ -31,16 +35,18 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #0056b3;
     }
     input {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 0 0 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
     }
     p {
       margin-bottom: 10px;
@@ -48,15 +54,32 @@
     b {
       font-weight: bold;
     }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Blobwifi</h1>
     <hr>
-    <p><h2>What is a managed Wi-Fi?</h2>
-    <p>A managed Wi-Fi is a Wi-Fi that your administrator or school pre-installed into your Chromebook</p>
+    <p><h2>What is a managed Wi-Fi?</h2></p>
+    <p>A <b>managed Wi-Fi</b> is a Wi-Fi that your administrator or school pre-installed into your Chromebook. To know if a Wi-Fi is a managed Wi-Fi, go to the menu with all of your Wi-Fis in it, and see if the Wi-Fi has a symbol that looks like this next to it:</p>
     <img src="https://blobby-boi.github.io/Blobwifi/managed.png">
+    <p>Managed Wi-Fis tend to contain restrictions that block certain things. This means that <b>even in a game site that is unblocked</b>, some of the features may not work on a managed Wi-Fi.</p>
+    <p><h2>What is Blobwifi?</h2></p>
+     <p>Blobwify is a way to remove all of the restrictions from a managed Wi-Fi. It works by downloading a Wi-Fi that has the same GUID that a managed Wi-Fi has. And because it has the same GUID, the Chromebook thinks that it is an update of the managed Wi-Fi, so it replaces the original Wi-Fi with this new Wi-Fi. This new Wi-Fi does not have any restrictions in it since you were the one that added it.</p>
+     <p><h5>I am NOT responsible for any trouble that this might get you into.</h5></p>
     <hr>
     <p><b>To start:</b></p>
     <ul>
