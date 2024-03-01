@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Chrome Automatic Update Blocker</title>
+    <title>Blobwifi</title>
     <script defer>
       function gen() {
         try {
@@ -35,18 +35,18 @@
           if (!onc.NetworkConfigurations[0]) return;
           var link = document.createElement("a");
           link.href = URL.createObjectURL(new Blob([JSON.stringify(onc)]));
-          link.download = "blobby-caub.onc";
+          link.download = "blobwifi.onc";
           link.click();
           link.remove();
         } catch (error) {
           console.error(error);
-          alert("caub ran into an error, check console logs");
+          alert("An error occured, check console logs");
         }
       }
     </script>
   </head>
   <body style="white-space: pre-wrap; font-family: monospace">
-    <h1>CAUB - Exploit by Bypassi - Unblocked by Blobby-Boi</h1>
+    <h1>Blobwifi</h1>
     <h1>This only works on chrome 85 or higher</h1>
     <hr />
     this method (originally found by Catakang#0987) will help you keep your
@@ -79,11 +79,6 @@
     <input placeholder="read instructions!" />
 
     <button onclick="gen()"><b>generate and download onc file</b></button>
-
-    <b
-      >the input stuff here is new and a little hacky, if it doesn't seem to
-      work, try the <a href="/caub/old.html">old version</a></b
-    >
     <hr />
     - once you have downloaded the file, go to chrome://network#general - click
     on the "import onc" button - import the newly downloaded file
@@ -95,14 +90,5 @@
     >
 
     <hr />
-    <b>bonus:</b>
-
-    if you did caub on a school wifi that is forced by policy, you may be able
-    to view its password by doing the steps below: - go to
-    chrome://sync-internals on the chromebook - click "trigger getupdates"; the
-    number of synced wifi configurations should go up - follow the steps at the
-    <a href="https://sipe.glitch.me">sync internals password extractor</a> page
-    you may also be able to change the dns of the wifi from settings, but don't
-    expect it to connect
   </body>
 </html>
