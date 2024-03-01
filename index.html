@@ -1,86 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blobwifi</title>
-    <script defer>
-      function gen() {
-        try {
-          var networks = document.querySelector("input").value;
-          networks = networks.replace(/(?<=[+-]..){/g, "");
-          networks = networks.replace(/(?<=})[^{\]}]*(?={.."C)/g, ",");
-          networks = networks.substring(networks.indexOf("{"));
-          networks = networks.substring(0, networks.lastIndexOf("}") + 1);
-          networks = JSON.parse("[" + networks + "]");
-          var onc = {
-            Type: "UnencryptedConfiguration",
-            NetworkConfigurations: [],
-          };
-          networks.forEach(function (network) {
-            if (!network.WiFi || !network.Connectable) return;
-            onc.NetworkConfigurations.push({
-              GUID: network.GUID,
-              Metered: true,
-              Name: network.Name,
-              Type: "WiFi",
-              WiFi: {
-                AutoConnect: true,
-                SSID: network.Name,
-                Security: "None",
-              },
-            });
-          });
-          if (!onc.NetworkConfigurations[0]) return;
-          var link = document.createElement("a");
-          link.href = URL.createObjectURL(new Blob([JSON.stringify(onc)]));
-          link.download = "blobwifi.onc";
-          link.click();
-          link.remove();
-        } catch (error) {
-          console.error(error);
-          alert("An error occured, check console logs");
-        }
-      }
-    </script>
-  </head>
-  <body style="white-space: pre-wrap; font-family: monospace">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blobwifi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    b {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
     <h1>Blobwifi</h1>
-    <hr/>
-    tester
-    <hr/>
-    <b>to start:</b>
-
-    - go to chrome://network#state (on your school chromebook of course; if this
-    is blocked then ur kinda screwed lol) - scroll to the bottom of the page;
-    you should see a list of "favorite" wifis that you've connected to in the
-    past - click the + sign next to the wifi name of each network that you
-    commonly connect your chromebook to
-
-    <b
-      >the more wifis you expand, the better, but note that they have to come
-      from the "favorites" section</b
-    >
-
-    - use ctrl+a and ctrl+c to copy all the text on the entire network#state
-    page - go back to this page (caub.glitch.me) - paste the copied text into
-    the textbox below - press the "generate onc" button below the textbox
-
-    <hr />
-    <input placeholder="read instructions!" />
-
-    <button onclick="gen()"><b>download</b></button>
-    <hr />
-    - once you have downloaded the file, go to chrome://network#general - click
-    on the "import onc" button - import the newly downloaded file
-
-    <b
-      >your chromebook will no longer automatically update (as long as you are
-      on a wifi that you used caub on) be careful not to stay on a wifi for too
-      long without using caub on it</b
-    >
-
-    <hr />
-  </body>
+    <hr>
+    <p><h2>Tester</h2>
+    <hr>
+    <p><b>To start:</b></p>
+    <ul>
+      <li>Go to chrome://network#state (on your school chromebook).</li>
+      <li>Scroll to the bottom of the page; you should see a list of "favorite" WiFis that you've connected to in the past.</li>
+      <li>Click the + sign next to the Wi-Fi name of each network that you commonly connect your Chromebook to.</li>
+      <li>The more WiFis you expand, the better, but note that they have to come from the "favorites" section.</li>
+      <li>Use Ctrl+A and Ctrl+C to copy all the text on the entire network#state page.</li>
+      <li>Paste the copied text into the textbox below.</li>
+      <li>Press the "Generate ONC" button below the textbox.</li>
+    </ul>
+    <hr>
+    <input placeholder="Paste copied text here">
+    <button onclick="gen()"><b>Download</b></button>
+    <hr>
+    <p>Once you have downloaded the file, go to chrome://network#general.</p>
+    <p>Click on the "Import ONC" button and import the newly downloaded file.</p>
+    <p>Your Wi-Fi should no longer have any restrictions in it.</p>
+    <hr>
+  </div>
+  <script>
+    function gen() {
+      try {
+        var networks = document.querySelector("input").value;
+        networks = networks.replace(/(?<=[+-]..){/g, "");
+        networks = networks.replace(/(?<=})[^{\]}]*(?={.."C)/g, ",");
+        networks = networks.substring(networks.indexOf("{"));
+        networks = networks.substring(0, networks.lastIndexOf("}") + 1);
+        networks = JSON.parse("[" + networks + "]");
+        var onc = {
+          Type: "UnencryptedConfiguration",
+          NetworkConfigurations: [],
+        };
+        networks.forEach(function (network) {
+          if (!network.WiFi || !network.Connectable) return;
+          onc.NetworkConfigurations.push({
+            GUID: network.GUID,
+            Metered: true,
+            Name: network.Name,
+            Type: "WiFi",
+            WiFi: {
+              AutoConnect: true,
+              SSID: network.Name,
+              Security: "None",
+            },
+          });
+        });
+        if (!onc.NetworkConfigurations[0]) return;
+        var link = document.createElement("a");
+        link.href = URL.createObjectURL(new Blob([JSON.stringify(onc)]));
+        link.download = "blobwifi.onc";
+        link.click();
+        link.remove();
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred, check console logs");
+      }
+    }
+  </script>
+</body>
 </html>
