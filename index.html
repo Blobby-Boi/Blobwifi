@@ -21,8 +21,19 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    .header {
+      display: flex;
+      align-items: center; /* Align items vertically */
+      justify-content: center; /* Align items horizontally */
+      margin-bottom: 20px;
+    }
+    .logo {
+      margin-right: 10px;
+      vertical-align: middle; /* Align the logo vertically */
+    }
     h1 {
-      text-align: center;
+      margin: 0;
+      vertical-align: middle; /* Align the heading vertically */
     }
     hr {
       border: none;
@@ -67,21 +78,32 @@
     ul li {
       margin-bottom: 10px;
     }
-    img {
-      display: block;
-      margin: 0 auto;
+    .image-wrapper {
+      text-align: center;
+    }
+    .image-wrapper img {
       max-width: 100%;
       height: auto;
+      display: inline-block;
+      margin: 0 auto;
+    }
+    img.logo {
+      outline: 2px solid blue; /* Adding outline specifically to the logo */
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1><img width="50" height="50"src="https://blobby-boi.github.io/Blobwifi/logo.png">Blobwifi</h1>
+    <div class="header">
+      <img width="50" height="50" src="https://blobby-boi.github.io/Blobwifi/logo.png" class="logo">
+      <h1>Blobwifi</h1>
+    </div>
     <hr>
     <p><h2>What is a managed Wi-Fi network?</h2></p>
     <p>A <b>managed Wi-Fi network</b> is a network that your administrator or school pre-installed into your Chromebook. To know if a Wi-Fi network is managed, go to the menu with all of your networks in it, and check if that network has a symbol that looks like this next to it:</p>
-    <img src="https://blobby-boi.github.io/Blobwifi/managed.png">
+    <div class="image-wrapper">
+      <img src="https://blobby-boi.github.io/Blobwifi/managed.png">
+    </div>
     <p>Managed networks tend to connect you to a DNS server that contains restrictions that block certain things. This means that <b>even in a game site that is unblocked</b>, some of the features may not work when using a managed Wi-Fi network.</p>
     <p><h2>What is Blobwifi?</h2></p>
      <p>Blobwifi is an exploit that allows Chromebook users to remove all of the restrictions from a managed Wi-Fi network. It works similarly to eanother exploit, <b>CAUB.</b></p>
