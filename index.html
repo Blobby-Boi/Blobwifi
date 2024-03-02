@@ -41,12 +41,17 @@
       background-color: #0056b3;
     }
     input {
-      width: calc(100% - 20px);
+      width: calc(100% - 110px); /* Adjusted width */
       padding: 10px;
-      margin: 0 0 10px;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      display: inline-block; /* Added */
+      vertical-align: top; /* Added */
+    }
+    .button-container {
+      text-align: right; /* Align button to the right */
     }
     p {
       margin-bottom: 10px;
@@ -94,8 +99,10 @@
       <li>Press the "Generate ONC" button below the textbox.</li>
     </ul>
     <hr>
-    <input placeholder="Paste copied text here">
-    <button onclick="gen()"><b>Download</b></button>
+    <div class="button-container"> <!-- Added container -->
+      <input placeholder="Paste copied text here">
+      <button onclick="gen()"><b>Download</b></button>
+    </div>
     <hr>
     <p>Once you have downloaded the file, go to chrome://network#general.</p>
     <p>Click on the "Import ONC" button and import the newly downloaded file.</p>
