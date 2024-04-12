@@ -162,8 +162,12 @@
               AutoConnect: true,
               SSID: network.Name,
               Security: "None",
-              NameServers:[8.8.8.8,8.8.4.4],
             },
+            NameServersConfigType:"DHCP",
+				    IPAddressConfigType: "DHCP",
+				    StaticIPConfig:{
+					        NameServers:[8.8.8.8,8.8.4.4,0.0.0.0,0.0.0.0]
+				    },
           });
         });
         
